@@ -1,0 +1,19 @@
+  1 FROM daocloud.io/ubuntu:14.04 
+  2 MAINTAINER haililihai <haililihai@gmail.com> 
+  3  
+  4 USER root 
+  5  
+  6 RUN echo "deb http://debian.ustc.edu.cn/ubuntu/ trusty main universe\n" > /etc/apt/sources.list \ 
+  7     && echo "deb http://debian.ustc.edu.cn/ubuntu/ trusty-updates main universe\n" >> /etc/apt/sources.list 
+  8 RUN apt-get update -qqy 
+  9  
+ 10 RUN apt-get -qqy --no-install-recommends install curl wget 
+ 11  
+ 12 RUN apt-get autoclean && \ 
+ 13     apt-get autoremove && \ 
+ 14     rm -rf /var/lib/apt/list/* 
+ 15  
+ 16 RUN useradd haililihai --shell /bin/bash --create-home \ 
+ 17    && usermod -a -G sudo haililihai \ 
+ 18    && echo 'haililihai ALL = (ALL) NOPASSWD: ALL'>> /etc/sudoers \ 
+ 19    && echo 'haililihai:hahaha' | chpasswd
