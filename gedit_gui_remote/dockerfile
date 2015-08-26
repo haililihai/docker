@@ -1,0 +1,17 @@
+# run a remote dockerized GUI gedit
+#
+# docker run -d \
+#     -v $HOME:/root:ro \
+#     -e XAUTHORITY=/root/.Xauthority \
+#     -e DISPLAY=$DISPLAY \
+#     --net=host \
+#     --name test_gui \
+#     haililihai/gedit_gui_remote \
+#     gedit
+
+FROM haililihai/gedit_gui
+
+RUN apt-get update -qqy
+RUN apt-get -y --no-install-recommends \
+    install ssh \
+    && rm -rf /var/lib/apt/list/*
