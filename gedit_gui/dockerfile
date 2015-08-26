@@ -1,0 +1,16 @@
+# run a dockerized GUI gedit locally
+# 
+# docker run -d \
+#    -v /tmp/.X11-unit:/tmp.X11-unix \
+#    -e DISPLAY=unix$DISPLAY \
+#    --name test_gui \
+#     haililihai/gedit_gui \
+#     gedit
+
+
+FROM haililihai/ubuntu-base
+
+RUN apt-get update -qqy
+RUN apt-get -y --no-install-recommends \
+    install gedit \
+    && rm -rf /var/lib/apt/list/*
