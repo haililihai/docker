@@ -1,0 +1,21 @@
+# run dockerized chrome
+# docker run -d -P \
+#       --name chrome \
+#       haililihai/chrome
+# 显示端口
+# docker port chrome  # e.g. 0.0.0.0:34567
+# VNC登录
+# vncviewer :34567
+
+FROM haililihai/x11vnc
+MAINTAINER haililihai <haililihai@gmail.com>
+
+# 安装Chrome
+#RUN wget -q -O - http://dl-ssl.google.com/linux/linux_signing_key.pub | apt-key add - \
+COPY linux_signing_key.pub /root/linux_signing_key.pub
+RUN apt-key add /root/linux_signing_key.pub
+RUN echo "deb http://dl.google.com/linux/chrome/deb/ stable main" >> /etc/apt/sources.list.d/google-chrome.list \
+    && apt-get update -qqy \
+      && apt-get -qqy install google-chrome-stable
+
+ENV APP_START "/opt/google/chrome/chrome infoq.com.cn"
