@@ -1,0 +1,36 @@
+FROM daocloud.io/ubuntu:14.04
+MAINTAINER haililihai <haililihai@gmail.com>
+
+USER root
+
+RUN echo "deb http://debian.ustc.edu.cn/ubuntu/ trusty main universe\n" > /etc/apt/sources.list \
+    && echo "deb http://debian.ustc.edu.cn/ubuntu/ trusty-updates main universe\n" >> /etc/apt/sources.list
+RUN apt-get update -qqy
+
+# 安装基本字体
+RUN apt-get -qqy --no-install-recommends install \
+	fonts-ipafont-gothic \
+	xfonts-100dpi \
+	xfonts-75dpi \
+	xfonts-cyrillic \
+	xfonts-scalable
+
+# 安装文泉驿微米黑
+RUN apt-get -qqy install tty-wqy-microhei \
+	&& ln /etc/fonts/conf.d/65-wqy-microhei.conf /etc/fonts/conf.d/69-language-selector-zh-cn.conf
+
+# 设置时区
+ENV TZ "PRC"
+RUN echo "Asia/Shanghai" | tee /etc/timezone \
+	&& dpkg-reconfigure --frontend noninteractive tzdata
+
+RUN apt-get -qqy --no-install-recommends install curl wget
+
+RUN apt-get autoclean && \
+    apt-get autoremove && \
+    rm -rf /var/lib/apt/list/*
+
+RUN useradd haililihai --shell /bin/bash --create-home \
+   && usermod -a -G sudo haililihai \
+   && echo 'haililihai ALL = (ALL) NOPASSWD: ALL'>> /etc/sudoers \
+   && echo 'haililihai:hahaha' | chpasswd
