@@ -13,6 +13,7 @@ FROM haililihai/ubuntu-base
 RUN apt-get update -qqy
 RUN apt-get -y --no-install-recommends \
     install gedit \
+    libcanberra-dev \
     && rm -rf /var/lib/apt/list/*
     
 RUN useradd -m not_root
