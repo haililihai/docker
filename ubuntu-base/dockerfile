@@ -3,7 +3,7 @@
   3  
   4 USER root 
   5  
-  6 RUN echo "deb http://debian.ustc.edu.cn/ubuntu/ trusty main universe\n" > /etc/apt/sources.list \ 
+  6 # RUN echo "deb http://debian.ustc.edu.cn/ubuntu/ trusty main universe\n" > /etc/apt/sources.list \ 
   7     && echo "deb http://debian.ustc.edu.cn/ubuntu/ trusty-updates main universe\n" >> /etc/apt/sources.list 
   8 RUN apt-get update -qqy 
   9  
