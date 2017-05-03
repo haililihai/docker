@@ -6,6 +6,8 @@
 #    --name test_gui \
 #     haililihai/gedit_gui \
 #     gedit
+#
+# docker logs -f ${tag}
 
 
 FROM haililihai/ubuntu-base
