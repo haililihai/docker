@@ -1,6 +1,6 @@
 # run a dockerized GUI gedit locally
 # 
-# docker run -d \
+# docker run --rm \
 #    -v /tmp/.X11-unix:/tmp.X11-unix \
 #    -e DISPLAY=unix$DISPLAY \
 #    --name test_gui \
@@ -12,11 +12,13 @@
 
 FROM haililihai/ubuntu-base
 
+RUN rm -rf /var/lib/apt/lists/* && apt-get clean
+RUN sed -i s:/archive.ubuntu.com:/mirrors.tuna.tsinghua.edu.cn/ubuntu:g /etc/apt/sources.list
 RUN apt-get update -qqy
 RUN apt-get -y --no-install-recommends \
     install gedit \
-    libcanberra-dev \
-    && rm -rf /var/lib/apt/list/*
+    uuid-runtime \
+    && rm -rf /var/lib/apt/lists/*
     
 RUN useradd -m not_root
 USER not_root
