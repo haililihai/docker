@@ -1,4 +1,4 @@
-FROM haililihai/ubuntu-base
+FROM ubuntu
 MAINTAINER haililihai <haililihai@gmail.com>
 
 RUN apt-get update -qqy
@@ -6,7 +6,7 @@ RUN apt-get -qqy --no-install-recommends install \
 	x11vnc xvfb fluxbox
 
 # 生成Hash过的密码文件
-RUN mkdir -pp ~/.vnc \
+RUN mkdir -p ~/.vnc \
 	&& x11vnc -storepasswd hahaha ~/.vnc/passwd
 
 RUN apt-get autoclean && \

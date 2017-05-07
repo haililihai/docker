@@ -1,0 +1,17 @@
+# run dockerized xeyes
+# docker run -d -P \
+#       --name xeyes \
+#       xeyes
+# 显示端口
+# docker port xeyes  # e.g. 0.0.0.0:34567
+# VNC登录
+# vncviewer :34567
+
+FROM x11vnc
+MAINTAINER haililihai <haililihai@gmail.com>
+
+RUN apt-get update -qqy \
+ && apt-get -qqy install X11-apps
+
+
+ENV APP_START "xeyes"

@@ -14,8 +14,8 @@ trap shutdown SIGTERM SIGINT
 # 使用Xvfb后台运行指定具有界面的软件，并记录下Xvfb程序的PID
 sudo -E -i -u haililihai \
 DISPLAY=$DISPLAY \
-	xvfb-run --server-args="$DISPLAY -screen 0 $GEOMETRY -ac +extension RANDR" \
-	$APP_START &
+xvfb-run --server-args="$DISPLAY -screen 0 $GEOMETRY -ac +extension RANDR" \
+$APP_START &
 NODE_PID=$!
 
 # 等待Xvfb程序启动完成
